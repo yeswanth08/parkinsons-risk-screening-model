@@ -4,40 +4,40 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+from sklearn.pipeline import Pipeline
 
-# opens => converts into structured data => stores in varecho 'source vpyenev/bin/activate' > .envrc
 data = pd.read_csv("data/parkinsons.data")
-
-# importing data
 
 # # inspecting first few rows
 # print(data.head())
 
 
 # # checking the shape => gives entries and cols
-# print(data.shape)
+# print("shape",data.shape)
 
 # # this is a data sanity check for missing values as ml cannot handle missing values => we should aim for all zeros
-# print(data.isnull().sum())
+# print("null chec\n",data.isnull().sum())
 
 # # simple check for status of disease
 # print(data["status"].value_counts())
 
 # # feature type
-# print(data.info())
+# print("info",data.info())
 
+# data cleaning 
 
-# data preparation & splitting
+# if a column is used to directly reveals the target(y) or strongly derived from the target then drop it
 
-# drop -> unuseful identifiers
+# # drop -> unuseful identifiers
 data = data.drop(columns=["name"])
 
-# sepearing x and y for feed and outcome
+# # sepearing x and y for feed and outcome
 y = data["status"]
 x = data.drop(columns=["status"])
 
 
-# splitting train-test (80-20)
+# # splitting train-test (80-20)
 X_train, X_test, Y_train, Y_test = train_test_split(x,y,test_size=0.2,random_state=42,stratify=y)
 
 # stratify = y -> bcs dataset is imbalanced we need to ensure the same ration of 0,1 are in test and train
@@ -57,21 +57,22 @@ X_train, X_test, Y_train, Y_test = train_test_split(x,y,test_size=0.2,random_sta
 # scaling features
 scaler = StandardScaler()
 
-# only train data
+# # only train data
 X_train = scaler.fit_transform(X_train)
 
-# use same on test data , using transform to avoid data leaking (learning from test data)
+# # use same on test data , using transform to avoid data leaking (learning from test data)
 X_test = scaler.transform(X_test) 
 
-# model
+# # model
 model = LogisticRegression()
 
 model.fit(X_train,Y_train)
 
 Y_pred = model.predict(X_test)
 
-# tesing the model
+# # tesing the model
 print("Acc",accuracy_score(Y_test,Y_pred))
 print("\nconfusion matrix",confusion_matrix(Y_test,Y_pred))
 print("\nclassification report",classification_report(Y_test,Y_pred))
+
 
