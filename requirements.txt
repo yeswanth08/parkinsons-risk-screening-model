@@ -1,8 +1,5 @@
 pandas
 scikit-learn
 matplotlib
-seaborn
-requests
 ipython
 imblearn
-numpy

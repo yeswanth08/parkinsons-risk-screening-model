@@ -1,7 +1,6 @@
 # CLASSIFICATION MODEL FOR CLASSIFYING VOICE BTW HEALTHY AND PARKISON +VE
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
 from imblearn.pipeline import Pipeline
@@ -13,7 +12,6 @@ from sklearn.metrics import classification_report,accuracy_score,ConfusionMatrix
 from sklearn.metrics import recall_score,f1_score,r2_score,log_loss,precision_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn import metrics
 from IPython.display import display
 
 # data collection
@@ -37,7 +35,7 @@ X_train , X_test , Y_train , Y_test = train_test_split(x, y, test_size=0.20, ran
 
 # Training Models with vairous Ml Algos
 
-# RANDOM FOREST MODEL WITH GRIDSEARCHCV
+# RANDOM FOREST CLASSIFIER MODEL WITH GRIDSEARCHCV
 
 # pipeline = scale -> smote (balance) -> train & tune
 rfc_model_pipeline = Pipeline([
