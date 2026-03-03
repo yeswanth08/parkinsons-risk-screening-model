@@ -1,4 +1,4 @@
-name: Build and Push Parkinsons-risk Screening ML Model
+name: Build and Push Parkinsons ML Models
 
 on:
   push:
@@ -26,10 +26,24 @@ jobs:
         id: version
         run: echo "VERSION=v1.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
-      - name: Build and push
+      # Build Classification Image
+      - name: Build and push Classification model
         uses: docker/build-push-action@v5
         with:
+          context: .
+          file: ./Dockerfile.classification
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/parkinsons-risk-screening-model:${{ steps.version.outputs.VERSION }}
-            ${{ secrets.DOCKER_USERNAME }}/parkinsons-risk-screening-model:latest
+            curiousyeswanth/parkinsons-classification-model:${{ steps.version.outputs.VERSION }}
+            curiousyeswanth/parkinsons-classification-model:latest
+
+      # Build Severity Image
+      - name: Build and push Severity model
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.severity
+          push: true
+          tags: |
+            curiousyeswanth/parkinsons-severity-regression-model:${{ steps.version.outputs.VERSION }}
+            curiousyeswanth/parkinsons-severity-regression-model:latest
