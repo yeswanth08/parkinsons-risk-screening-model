@@ -16,7 +16,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from IPython.display import display
 
 # data collection
-df = pd.read_csv("data/parkinsons.data")
+df = pd.read_csv("../data/parkinsons.data")
 
 # data pre-processing
 
@@ -167,4 +167,4 @@ display(comparision_table)
 # by observation we can see the random forest model give the best accuracy 
 # extracting the best bin during the run-time
 
-jl.dump(knn_model_pipeline,"./bin/classfication_model.pkl")
+jl.dump(knn_model_pipeline,"../bin/classfication_model.pkl")
