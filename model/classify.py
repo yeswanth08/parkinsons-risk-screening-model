@@ -2,6 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import joblib as jl
 
 from imblearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
@@ -153,12 +154,17 @@ plt.show()
 # comparision table -> for doc
 
 comparision_table = {
-        'Metric':["Accuracy", "F1-Score", "Recall", "Precision", "R2-Score"],
-        'RF':[accuracy_score(Y_test, pred_rfc), f1_score(Y_test, pred_rfc), recall_score(Y_test, pred_rfc), precision_score(Y_test, pred_rfc), r2_score(Y_test, pred_rfc)],
-        'LR':[accuracy_score(Y_test, pred_lr), f1_score(Y_test, pred_lr), recall_score(Y_test, pred_lr), precision_score(Y_test, pred_lr), r2_score(Y_test, pred_lr)],
-        'KNN':[accuracy_score(Y_test, pred_knn), f1_score(Y_test, pred_knn), recall_score(Y_test, pred_knn), precision_score(Y_test, pred_knn), r2_score(Y_test, pred_knn)],
+        'Metric':["Accuracy", "F1-Score", "Recall", "Precision"],
+        'RF':[accuracy_score(Y_test, pred_rfc), f1_score(Y_test, pred_rfc), recall_score(Y_test, pred_rfc), precision_score(Y_test, pred_rfc)],
+        'LR':[accuracy_score(Y_test, pred_lr), f1_score(Y_test, pred_lr), recall_score(Y_test, pred_lr), precision_score(Y_test, pred_lr)],
+        'KNN':[accuracy_score(Y_test, pred_knn), f1_score(Y_test, pred_knn), recall_score(Y_test, pred_knn), precision_score(Y_test, pred_knn)],
 }
 
 comparision_table = pd.DataFrame(comparision_table)
 
 display(comparision_table)
+
+# by observation we can see the random forest model give the best accuracy 
+# extracting the best bin during the run-time
+
+jl.dump(knn_model_pipeline,"./bin/classfication_model.pkl")

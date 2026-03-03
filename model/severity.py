@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import joblib as jl
 
 from sklearn.model_selection import train_test_split,GridSearchCV
 from imblearn.pipeline import Pipeline
@@ -200,3 +201,9 @@ comparision_table = {
 comparision_table = pd.DataFrame(comparision_table)
 
 display(comparision_table)
+
+
+# from the obersvation random forest model has best r2 score and eff
+# extracting the best bin during the run-time
+
+jl.dump(rfr_model_pipeline,"./bin/severity_model.pkl")
