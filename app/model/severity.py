@@ -15,7 +15,7 @@ from xgboost import XGBRegressor
 from IPython.display import display
 
 # read csv
-df = pd.read_csv('../data/parkinsons_updrs.data')
+df = pd.read_csv('data/parkinsons_updrs.data')
 
 # data cleaning to avoid data leakage
 df = df.drop(columns=['subject#','total_UPDRS'])
@@ -206,4 +206,4 @@ display(comparision_table)
 # from the obersvation random forest model has best r2 score and eff
 # extracting the best bin during the run-time
 
-jl.dump(rfr_model_pipeline,"../bin/severity_model.pkl")
+jl.dump(best_rfr,"bin/severity_model.pkl")

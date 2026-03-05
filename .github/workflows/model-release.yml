@@ -19,7 +19,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            app/bin/classfication_model.pkl
+            app/bin/classification_model.pkl
             app/bin/severity_model.pkl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
